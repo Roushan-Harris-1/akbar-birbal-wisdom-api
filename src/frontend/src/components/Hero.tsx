@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Sparkles } from "lucide-react";
+import { Check, ChevronDown, Copy, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Story } from "../backend";
 import { useActor } from "../hooks/useActor";
@@ -29,6 +29,9 @@ export function CategoryBadge({ category }: { category: string }) {
 export default function Hero() {
   const { actor } = useActor();
   const [heroStory, setHeroStory] = useState<Story | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const apiUrl = `${window.location.origin}/Akbar-Birbal-API/random`;
 
   useEffect(() => {
     if (!actor) return;
@@ -36,6 +39,13 @@ export default function Hero() {
       if (res.length > 0) setHeroStory(res[0] as Story);
     });
   }, [actor]);
+
+  function handleCopy() {
+    navigator.clipboard.writeText(apiUrl).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
 
   return (
     <section
@@ -117,6 +127,44 @@ export default function Hero() {
             </div>
           </div>
         )}
+
+        {/* Live API Link Slot */}
+        <div className="ornate-border relative max-w-2xl mx-auto mt-6 rounded-xl bg-card p-5 shadow-gold">
+          <div className="absolute -top-3 left-6 px-2 bg-card text-xs font-code text-primary">
+            Live Random API Endpoint
+          </div>
+          <p className="text-xs text-muted-foreground mb-3 font-body">
+            Copy &amp; paste this link in your browser to get a random story:
+          </p>
+          <div className="flex items-center gap-2">
+            <code
+              data-ocid="hero.api_link.input"
+              className="flex-1 bg-muted/60 border border-primary/30 rounded-lg px-3 py-2.5 font-code text-sm text-primary truncate select-all cursor-text"
+              title={apiUrl}
+            >
+              {apiUrl}
+            </code>
+            <Button
+              size="sm"
+              variant="outline"
+              className="shrink-0 border-primary/40 hover:border-primary hover:bg-primary/10 text-primary gap-1.5 font-semibold transition-all"
+              onClick={handleCopy}
+              data-ocid="hero.api_link.button"
+            >
+              {copied ? (
+                <>
+                  <Check className="h-4 w-4" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4" />
+                  Copy
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
 
         <a
           href="#demo"
