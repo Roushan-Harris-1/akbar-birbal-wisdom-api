@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0.97 0.008 85;
+    --foreground: 0.18 0.025 255;
+    --card: 0.99 0.004 85;
+    --card-foreground: 0.18 0.025 255;
+    --popover: 0.99 0.004 85;
+    --popover-foreground: 0.18 0.025 255;
+    --primary: 0.65 0.18 55;
+    --primary-foreground: 0.99 0.004 85;
+    --secondary: 0.92 0.012 85;
+    --secondary-foreground: 0.25 0.03 255;
+    --muted: 0.93 0.01 85;
+    --muted-foreground: 0.5 0.025 255;
+    --accent: 0.65 0.18 55;
+    --accent-foreground: 0.99 0.004 85;
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.99 0.004 85;
+    --border: 0.88 0.012 85;
+    --input: 0.88 0.012 85;
+    --ring: 0.65 0.18 55;
+    --radius: 0.5rem;
+    --chart-1: 0.65 0.18 55;
+    --chart-2: 0.55 0.15 160;
+    --chart-3: 0.5 0.18 230;
+    --chart-4: 0.6 0.2 300;
+    --chart-5: 0.55 0.22 25;
+    --sidebar: 0.95 0.008 85;
+    --sidebar-foreground: 0.18 0.025 255;
+    --sidebar-primary: 0.65 0.18 55;
+    --sidebar-primary-foreground: 0.99 0.004 85;
+    --sidebar-accent: 0.9 0.01 85;
+    --sidebar-accent-foreground: 0.25 0.03 255;
+    --sidebar-border: 0.88 0.012 85;
+    --sidebar-ring: 0.65 0.18 55;
+  }
+
+  .dark {
+    --background: 0.12 0.022 255;
+    --foreground: 0.92 0.012 85;
+    --card: 0.16 0.028 255;
+    --card-foreground: 0.92 0.012 85;
+    --popover: 0.14 0.025 255;
+    --popover-foreground: 0.92 0.012 85;
+    --primary: 0.76 0.17 60;
+    --primary-foreground: 0.1 0.02 255;
+    --secondary: 0.21 0.03 255;
+    --secondary-foreground: 0.88 0.01 85;
+    --muted: 0.22 0.025 255;
+    --muted-foreground: 0.62 0.02 255;
+    --accent: 0.76 0.17 60;
+    --accent-foreground: 0.1 0.02 255;
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.99 0.004 85;
+    --border: 0.26 0.032 255;
+    --input: 0.22 0.028 255;
+    --ring: 0.76 0.17 60;
+    --chart-1: 0.76 0.17 60;
+    --chart-2: 0.65 0.15 160;
+    --chart-3: 0.6 0.18 230;
+    --chart-4: 0.65 0.2 300;
+    --chart-5: 0.6 0.22 25;
+    --sidebar: 0.14 0.025 255;
+    --sidebar-foreground: 0.92 0.012 85;
+    --sidebar-primary: 0.76 0.17 60;
+    --sidebar-primary-foreground: 0.1 0.02 255;
+    --sidebar-accent: 0.2 0.03 255;
+    --sidebar-accent-foreground: 0.88 0.01 85;
+    --sidebar-border: 0.26 0.032 255;
+    --sidebar-ring: 0.76 0.17 60;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(
+      135deg,
+      oklch(0.76 0.17 60),
+      oklch(0.85 0.14 75),
+      oklch(0.72 0.19 48)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .dark .text-gradient-gold {
+    background: linear-gradient(
+      135deg,
+      oklch(0.82 0.18 60),
+      oklch(0.9 0.14 75),
+      oklch(0.78 0.2 48)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-pattern-grid {
+    background-image: linear-gradient(
+        oklch(var(--border) / 0.4) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to right, oklch(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .ornate-border {
+    position: relative;
+  }
+  .ornate-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      oklch(0.76 0.17 60 / 0.6),
+      transparent,
+      oklch(0.76 0.17 60 / 0.3)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .json-key {
+    color: oklch(0.82 0.18 60);
+  }
+  .json-string {
+    color: oklch(0.68 0.17 155);
+  }
+  .json-number {
+    color: oklch(0.72 0.18 235);
+  }
+  .json-bool {
+    color: oklch(0.72 0.18 300);
+  }
+  .json-null {
+    color: oklch(0.6 0.02 255);
+  }
+
+  .dark .json-string {
+    color: oklch(0.78 0.17 155);
+  }
+}
